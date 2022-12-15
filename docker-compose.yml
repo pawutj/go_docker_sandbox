@@ -1,0 +1,30 @@
+version: "3.3"
+
+services:
+  test_sum:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=go-example-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
+#docker-compose -f docker-compose.yml up  --exit-code-from test_sum
+
+#docker-compose -f docker-compose.yml down
