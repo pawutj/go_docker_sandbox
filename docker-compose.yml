@@ -22,7 +22,7 @@ services:
     expose:
       - 5432
     volumes:
-      - ./db/01-init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./db:/docker-entrypoint-initdb.d
 #docker-compose -f docker-compose.yml up  --exit-code-from test_sandbox
 
 #docker-compose -f docker-compose.yml down
