@@ -1,12 +1,13 @@
 package go_docker_sandbox
 
 import (
+	"fmt"
 	"testing"
 )
 
 func TestConnectDB(t *testing.T) {
 	db := ConnectDB()
-	defer db.Exec("Drop table product")
+
 	if db == nil {
 		t.Fatalf("ConnectDB failed")
 	}
@@ -16,18 +17,21 @@ func TestConnectDB(t *testing.T) {
 		t.Fatalf("Select failed")
 	}
 
-	var id, price int
-	var name string
+	for rows.Next() {
+		var id, price int
+		var name string
 
-	rows.Next()
-	err = rows.Scan(&id, &name, &price)
+		err = rows.Scan(&id, &name, &price)
 
-	if err != nil {
-		t.Fatalf("Error from scan")
-	}
+		if err != nil {
+			t.Fatalf("Error from scan")
+		}
 
-	if name != "SomeProduct" {
-		t.Errorf("Want SomeProduct result %s", name)
+		fmt.Println(id, " ", name)
+
+		if name != "SomeProduct" {
+			t.Errorf("Want SomeProduct result %s", name)
+		}
 	}
 
 }
