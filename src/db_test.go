@@ -6,6 +6,7 @@ import (
 
 func TestConnectDB(t *testing.T) {
 	db := ConnectDB()
+	defer db.Exec("Drop table product")
 	if db == nil {
 		t.Fatalf("ConnectDB failed")
 	}
