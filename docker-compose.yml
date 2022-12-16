@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  test_sum:
+  test_sandbox:
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -19,12 +19,8 @@ services:
       - POSTGRES_DB=go-example-db
     ports:
       - "5432:5432"
-    volumes:
-      - db:/var/lib/postgresql/data
-
-volumes:
-  db:
-    driver: local
-#docker-compose -f docker-compose.yml up  --exit-code-from test_sum
+    expose:
+      - 5432
+#docker-compose -f docker-compose.yml up  --exit-code-from test_sandbox
 
 #docker-compose -f docker-compose.yml down

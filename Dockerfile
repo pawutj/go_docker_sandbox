@@ -6,6 +6,7 @@ WORKDIR /app
 
 CMD CGO_ENABLED=0 go test -v ./...
 
+
 #docker images
 #docker image rm *
 
