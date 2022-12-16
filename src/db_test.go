@@ -1,7 +1,6 @@
 package go_docker_sandbox
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -22,12 +21,9 @@ func TestConnectDB(t *testing.T) {
 		var name string
 
 		err = rows.Scan(&id, &name, &price)
-
 		if err != nil {
 			t.Fatalf("Error from scan")
 		}
-
-		fmt.Println(id, " ", name)
 
 		if name != "SomeProduct" {
 			t.Errorf("Want SomeProduct result %s", name)
